@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Configuracion del Sistema' /}
+
+#{secure.check 'admin'}
+	#{if usrLogueado.getIsAbrirCaja()}
+		<h2 class="text-center">Pagos</h2>
+	#{/if}
+	#{else}
+		<h2 class="text-center">Necesitas aperturar caja, para iniciar los pagos</h2>
+	#{/else}
+#{/secure.check}

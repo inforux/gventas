@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+#{set title:'Configuracion del Sistema' /}
+
+#{secure.check 'admin'}
+	#{if usrLogueado.getIsAbrirCaja()}
+		<h2 class="text-center">Retiro de dinero</h2>
+	#{/if}
+	#{else}
+		<h2 class="text-center">Necesitas aperturar caja, para retirar dinero</h2>
+	#{/else}
+#{/secure.check}
+#{else}
+	holaaa
+#{/else}
+

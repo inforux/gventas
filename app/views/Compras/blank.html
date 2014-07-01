@@ -1,0 +1,127 @@
+
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.modelName) /}
+
+
+<div id="crudShow" class="${type.name}">
+
+
+<div >
+	<div style="margin-bottom:10px;" class="row bgCeleste">
+
+		<div class="col-md-3 ">
+			<div class="input-group">
+			  <span class="input-group-addon">Peso</span>
+			  <input id="peso" type="text" class=" ecompra form-control"  maxlength="20" >
+			  <span class="input-group-addon">Kg</span>
+			</div>
+		</div>
+
+		<div class="col-md-3 ">
+			<div class="input-group">
+			  <span class="input-group-addon">Precio</span>
+			  <input id="precio" type="text" class="ecompra form-control"  maxlength="20" >
+			  <span class="input-group-addon">s/</span>
+			</div>
+		</div>
+		<div class="col-md-3 ">
+
+			<div class="input-group">
+				<span class="input-group-btn">
+			<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" onclick="openModalCompra()">
+				 Elegir especie 
+			  </button>
+			        </span>
+			  	<input id="idProducto" type="hidden" class="ecompra form-control" value="">
+	                   	<input type="text" class="form-control" id="nombreEspecie" value="">
+
+			</div>
+		</div>
+		<div class="col-md-3 ">
+			<div class="input-group">
+
+			  <span class="input-group-addon">Agregar</span>
+			<button class="btn btn-success btn-sm" onclick="addDetalleCompra()">
+				 + 
+			  </button>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div  class="row bgCeleste" >
+		<div  class="crudListTable col-md-12" >
+			<table >
+				<thead>
+					<tr>
+						<th>Peso</th>
+						<th>Precio</th>
+						<th>Especie</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody id="ajaxDetalleVenta" >
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+</div>
+
+
+<div class="row " style="margin-top:20px" >
+
+	<div class="bgCelesteHard col-md-3">
+
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon">Proveedor</span>
+#{select '', items:proveedores, valueProperty:'id', value:'razonSocial', class:"form-control", id:'comboProveedores' , name:'comboProveedores' /}
+
+			</div>
+	</div>
+
+	<div class="col-md-3 bgCelesteHard">
+
+			<div class="input-group">
+				<span class="input-group-btn">
+			<button class="btn btn-warning btn-sm" onclick="generarComprobanteCompra()">
+				 Generar 
+			  </button>
+			        </span>
+				<div id="ajaxGenerarComprobante">
+	                   	<input type="text" id="serieComprobanteCompra" class="form-control" id="serie" value="" placeholder="Serie comprobante">
+				</div>
+
+			</div>
+
+
+	</div>
+
+	<div id="ajaxTotalCompra" class="col-md-3 bgCelesteHard">
+		#{totalCompra total:"0.00" /}
+	</div>
+
+	<div class="col-md-3">
+		<div class="row text-right" style="margin-left:10px;" >
+			<input type="hidden" id="isTodoOk" value=false>
+			<input  id="confirmaCompra" type="button" onclick="confirmaCompra()" value="REALIZAR LA COMPRA" class="btn btn-primary btn-md"  >
+			<input  onclick="cancelarVenta()"  id="eliminaVenta" type="button" value="Cancelar" class="btn btn btn-sm"  >
+		</div>
+	</div>
+
+</div>
+
+
+
+
+<script>
+$(function () {
+	$("#codigoBarra").focus()
+});
+</script>
+

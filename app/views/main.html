@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/crud.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/justified-nav.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-theme.min.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+
+        #{script src:"jquery-1.9.1.js" /}
+	#{script src:"bootstrap.min.js" /}
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content" id="ajaxModal">
+	 </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+
+<div class="container">
+
+       <div class="masthead">
+
+       <div class="row">
+		<div class="col-md-9">
+		       <h3 class="text-muted ">Pescados y Mariscos "San Jose"  </h3>
+		</div>
+
+		<div class="col-md-3">
+
+		#{if usrLogueado != null}
+			<a href="#" class="">${usrLogueado.toString()}</a>
+			| <a href="@{Secure.logout()}" class="">Cerrar</a>
+			<h5 class="text-primary">Sede: ${usrLogueado.sede}</h5>
+		#{/if}
+		#{else}
+			#{form @Secure.login()}
+			<button type="submit" class="btn btn-primary btn-md" >
+				 Login 
+ 			 </button>
+			#{/form}
+		#{/else}
+		</div>
+
+	</div>
+
+	#{menu usrLogueado:usrLogueado /}
+      </div>
+      <div>
+		#{doLayout /}
+      </div>
+
+
+         <!-- Site footer -->
+  <div class="footer">
+          <p>&copy; Inforux 2014</p>
+  </div>
+
+</div> <!-- /container -->
+
+    </body>
+</html>
+
+	#{secure.check 'admin'}
+
+	<script>
+		$(".disabled").removeClass("disabled");
+		$("#nventa").addClass("disabled");
+		$("#npago").addClass("disabled");
+		$("#rdinero").addClass("disabled");
+	</script>
+			    #{if usrLogueado?.getIsAbrirCaja()}
+				    	<script>
+					$("#nventa").removeClass("disabled");
+					$("#rdinero").removeClass("disabled");
+					$("#npago").removeClass("disabled");
+					</script>
+			    #{/if}
+			    #{else}
+			    	<script>
+					$("#nventa").addClass("disabled");
+					$("#npago").addClass("disabled");
+					$("#rdinero").addClass("disabled");
+				</script>
+			    #{/else}
+
+	#{/secure.check}
+
+<script>
+$(document).ready(function() { 
+	    $(".desactivado").click(function() { // desabilitamos los menu
+			 return false; 
+	    });
+
+	    $("body").keypress(function(e){
+		 if(e.keyCode == 98)
+		 {
+			$("#codigoBarra").focus();				
+			$("#codigoBarra").val("");				
+		 }
+
+		 if(e.keyCode == 112)
+		 {
+			$("#pagoCon").focus();				
+			$("#pagoCon").val("");				
+		 }
+
+		 if(e.keyCode == 118)
+		 {
+			$("#vender").focus();				
+		 }
+
+	    });
+});
+
+var vectorDetalles = new Array();
+var presentacion;
+var va1;
+var va2;
+var va3;
+var va4;
+var va5;
+var va6;
+var va7;
+var va8;
+var oldTotal;
+var total;
+var igv;
+var nav4 = window.Event ? true : false;
+
+function isAbrirCaja(val){
+	if ( !val)
+	{
+		if(confirm('¿Seguro que desea cerrar caja?'))
+		{
+			action = #{jsAction @Application.ajaxAbrirCaja(':ia')/}
+			$.post(action({ia:false}),  function(data) {
+				$('#ajaxAbrirCaja').html(data); 
+				location.reload();
+			})
+		}
+	}
+	else{
+		if(confirm('¿Seguro que desea abrir caja?'))
+		{
+			action = #{jsAction @Application.ajaxAbrirCaja(':ia')/}
+			$.post(action({ia:true}),  function(data) {
+				$('#ajaxAbrirCaja').html(data); 
+				location.reload();
+			})
+		}
+	}
+}
+
+
+function validaImporte(evt){
+	var key = nav4 ? evt.which : evt.keyCode;
+	if ( key == 13)
+	{
+		va1=$("#comboTipoPago").val();	
+		if (va1 == 1){
+			chkSoloEfectivo()
+		}
+	}
+	return ( (key <= 13 || key ==46) || (key >= 48 && key <= 57) );
+}
+
+function chkSoloEfectivo(){
+	va2=$("#montoTotal").val();	
+	va3=$("#pagoCon").val();	
+	action = #{jsAction @Ventas.chkSoloEfectivo(':ia',':ib')/}
+	$.post(action({ia:va2,ib:va3}),  function(data) {
+		$("#ajaxVuelto").html(data)
+		va4=$("#isErrorSoloEfectivo").val();	
+		if ( va4 == 'true')
+		{
+			alert("El importe deberia ser mayor que el monto de venta");
+			$("#isTodoOk").val(false);
+		}
+		else{
+				$("#isTodoOk").val(true);
+		}
+	})
+}
+
+function confirmaVenta(){
+
+	va1= $("#isTodoOk").val();
+	va2=$("#pagoCon").val();
+	va3=$("#cambio").val();
+	va4=$("#comboTipoComprobante").val();	
+	va5=$("#montoTotal").val();
+	if (va1== 'true' )
+	{
+		action = #{jsAction @Ventas.ajaxConfirmaVentaSoloEfectivo(':ia',':ib',':ic',':id',':ie')/}
+		$.post(action({ia:vectorDetalles,ib:va2,ic:va3,id:va4, ie:va5 }),  function(data) {
+			//alert("Venta con exito")
+			location.reload();
+		})
+	}
+	else{
+		alert("Aun no se puede efectuar la venta."  );
+	}
+}
+
+function cambiarTipoDocumento(){
+
+	va1=$("#comboTipoComprobante").val();	
+	va2=$("#montoTotal").val();	
+	va3=$("#subTotal").val();	
+	action = #{jsAction @Ventas.ajaxTipoDocumento(':ia',':ib',':ic')/}
+	$.post(action({ia:va1,ib:va2,ic:va3 }),  function(data) {
+		$("#ajaxModoPago").html(data);
+
+		oldSubTotal=$("#subTotal").val();
+		oldTotal=$("#montoTotal").val();
+		igv=$("#igv").val();
+
+		action = #{jsAction @Ventas.ajaxTotal(':ia',':ib',':ic')/}
+		$.post(action({ia:oldTotal,ib:oldSubTotal,ic:igv}),  function(data) {
+			$("#ajaxTotal").html(data);
+		})
+	})
+}
+
+function getProducto(){
+	a = $("#codigoBarra").val()
+	b=a.substr(2,5)
+	return b
+}
+
+function getPeso(){
+	a = $("#codigoBarra").val()
+	b=a.substr(7,5)
+	//ahora le insertamos el punto
+	c= b.substr(0,2);
+	code= b.substr(2,3);
+	return c+"."+code; 
+}
+
+function resetFormaDePago(){
+	action = #{jsAction @Ventas.ajaxFormaDePago(':ic')/}
+	$.post(action({ia:1}),  function(data) {
+		$("#ajaxModoPago").html(data);
+	})
+}
+
+function validaCodigoBarra(){
+	a = $("#codigoBarra").val()
+	if (a.length == 13){
+		addDetalleVenta(getProducto(), getPeso())
+		resetFormaDePago();
+		$("#codigoBarra").val("")
+		$("#codigoBarra").focus();
+	}
+	else{
+		alert("Codigo de barra incorrecto, debe tener 13 caracteres")
+	}
+}
+
+function addDetalleVenta(prod, peso){
+	oldTotal=$("#subTotal").val();
+	oldSubTotal=$("#montoTotal").val();
+	va1=$("#comboTipoComprobante").val();	
+	action = #{jsAction @Ventas.ajaxDetalleVenta(':ia',':ib',':ic',':id',':ie')/}
+	$.post(action({ia:prod,ib:peso,ic:oldTotal,id:oldSubTotal,ie:va1}),  function(data) {
+		$("#ajaxDetalleVenta").append(data);
+		oldSubTotal=$("#subTotal").val();
+		oldTotal=$("#montoTotal").val();
+		igv=$("#igv").val();
+
+
+		action = #{jsAction @Ventas.ajaxTotal(':ia',':ib',':ic')/}
+		$.post(action({ia:oldTotal,ib:oldSubTotal,ic:igv}),  function(data) {
+			$("#ajaxTotal").html(data);
+		})
+	})
+}
+
+function IsOnlyNumber(evt, i){
+	// Backspace = 8, Enter = 13, '0# = 48, '9# = 57, `.' = 46
+	var key = nav4 ? evt.which : evt.keyCode;
+	if ( key == 13)
+	{
+		if(i==0)
+			validaCliente();	
+		if(i==1)
+			validaCliente2();	
+		if(i==2)
+			validaCodigoBarra();	
+		if(i==5)
+			validaCliente5();	
+		if(i==20)
+			validaComprobante();	
+	}
+	return (key <= 13 || (key >= 48 && key <= 57) );
+}
+
+function generarCopiaSeguridad(){
+
+	action = #{jsAction @Application.generarCopiaSeguridad()/}
+	$.post(action({}),  function(data) {
+		$("#dContenido").append(data);
+		alert("copia con exito")
+	})
+}
+ function openModalCompra(){
+
+	action = #{jsAction @Compras.modalDetalleProducto()/}
+	$.post(action({}),  function(data) {
+		$("#ajaxModal").html(data);
+	})
+ }
+
+ function openModalClientes(){
+	action = #{jsAction @Ventas.modalClientes()/}
+	$.post(action({}),  function(data) {
+		$("#ajaxModal").html(data);
+	})
+ }
+
+ function openModalAddUser(){
+
+	action = #{jsAction @Usuarios.modalAddUser()/}
+	$.post(action({}),  function(data) {
+		$("#ajaxModal").html(data);
+	})
+ }
+
+
+function setProductoCompra(id, name){
+	if ( id == 0)
+	{
+		$("#idProducto").val("0");
+		$("#nombreEspecie").val("");
+	}
+	else
+	{
+		$("#idProducto").val(id);
+		$("#nombreEspecie").val(name);
+	}
+	$('#myModal').modal('hide');
+}
+
+function setClienteVenta(id, dni, name){
+	if ( id == 0)
+	{
+		$("#idCliente").val("0");
+		$("#dni").val("");
+		$("#cliente").val("");
+	}
+	else
+	{
+		$("#idCliente").val(id);
+		$("#dni").val(dni);
+		$("#cliente").val(name);
+	}
+	$('#myModal').modal('hide');
+}
+
+function addDetalleCompra(){
+	peso=$("#peso").val();
+	precio=$("#precio").val();
+	var montoTotal= $("#montoTotalCompra").val();
+	idProducto=$("#idProducto").val();
+
+	action = #{jsAction @Compras.ajaxDetalleCompra(':ia',':ib',':ic',':id')/}
+	$.post(action({ia:peso,ib:precio,ic:idProducto, id:montoTotal}),  function(data) {
+		$("#ajaxDetalleVenta").append(data);
+		// update el precio total
+
+		total=$("#montoTotalCompra").val();
+		action = #{jsAction @Compras.ajaxTotalCompra(':ia')/}
+		$.post(action({ia:total}),  function(data) {
+			$("#ajaxTotalCompra").html(data);
+		})
+	})
+}
+
+function generarComprobanteCompra(){
+	action = #{jsAction @Compras.ajaxGenerarComprobante()/}
+	$.post(action({}),  function(data) {
+		$("#ajaxGenerarComprobante").html(data);
+	})
+}
+
+function confirmaCompra(){
+
+	va1= $("#isTodoOk").val();
+	va2=$("#comboProveedores").val();
+	va3=$("#serieComprobanteCompra").val();
+	va4=$("#montoTotalCompra").val();
+	if (va1== 'true' )
+	{
+		action = #{jsAction @Compras.ajaxConfirmaCompra(':ia',':ib',':ic',':id')/}
+		$.post(action({ia:vectorDetalles,ib:va2,ic:va3,id:va4 }),  function(data) {
+			alert("compra con exito")
+			location.reload();
+		})
+	}
+	else{
+		alert("Aun no se puede efectuar la compra."  )
+	}
+}
+
+function saveAddUser()
+{
+    va1=$("#nameU").val();
+    va2=$("#lastNameU").val(),
+    va3=$("#emailU").val(),
+    va4=$("#passwdU").val(),
+    va5=$("#rpasswdU").val(),
+    va6=$("#isAdminU").is(":checked"),
+    va7=$("#sexoU").val();
+    va8=$("#isCajaU").val();
+    if( isValidEmailAddress(va3) == true )
+    {
+    	action = #{jsAction @Usuarios.saveAddUser(':a',':b',':c',':d',':e',':f',':g',':h')/}
+		$.post(action({ a:va1,b:va2,c:va3,d:va4,e:va5,f:va6,g:va7, h:va8 }),  function(data) {
+			location.reload();
+		})
+        
+    }
+}
+
+	function isValidEmailAddress(emailAddress)
+	{
+    	var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    	return pattern.test(emailAddress);
+	}
+
+function saveInventario(){
+    va1= $("#comentario").val();
+
+    	action = #{jsAction @Inventarios.saveInventario(':a')/}
+		$.post(action({ a:va1 }),  function() {
+                alert("Se ejecuto y guardo el inventario con exito");
+                window.location.href = "/inventarios/list";
+		})
+}
+
+function modalInventario(id){
+    	action = #{jsAction @Inventarios.modalInventario(':a')/}
+		$.post(action({ a:id }),  function(data) {
+		    $("#ajaxModal").html(data);
+		})
+}
+
+
+
+</script>

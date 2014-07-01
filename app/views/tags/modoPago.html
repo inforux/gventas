@@ -1,0 +1,43 @@
+		<div class="col-md-5 bgCeleste" >
+				<h3>&{'aCuenta'}</h3>
+			<div class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'dni'}</span>
+			  <input class="form-control" id="dni" >
+			  <input class="form-control" type="hidden" id="idCliente" >
+			  <span class="input-group-addon glyphicon glyphicon-search cursor" data-toggle="modal" data-target="#myModal" onclick="openModalClientes()"></span>
+			</div>
+
+			<div class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'nombre'}</span>
+			  <input class="form-control" id="cliente" >
+			</div>
+
+			<div class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'montoACuenta'}</span>
+			  <input class="form-control" >
+			</div>
+
+		</div>
+
+		<div class="col-md-2" >
+		</div>
+
+		<div class="col-md-5 bgCeleste" >
+			<h3>&{'efectivo'}</h3>
+
+			<div class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'saldo'}</span>
+			  <input class="form-control " readOnly>
+			</div>
+
+			<div class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'importe'}</span>
+				  <input class="form-control" id="pagoCon" onkeypress="return validaImporte(event);" maxlength="8" >
+			</div>
+
+			<div id="ajaxVuelto" class="input-group " style="margin-top:30px">
+			  <span class="input-group-addon">&{'vuelto'}</span>
+			  <input class="form-control " readOnly id="cambio"  >
+			</div>
+
+		</div>

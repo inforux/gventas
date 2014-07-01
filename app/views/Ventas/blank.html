@@ -1,0 +1,95 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.blank.title', type.modelName) /}
+
+#{if usrLogueado.getIsAbrirCaja()}
+
+<div id="crudShow" class="${type.name}">
+
+<div class="row bgCelesteHard" >
+
+	<div class="col-md-4">
+
+			<div class="input-group input-group-lg" >
+			  <span class="input-group-addon">C. Barra</span>
+			  <input id="codigoBarra" type="text" class="form-control" onkeypress="return IsOnlyNumber(event,2);" maxlength="13" >
+			</div>
+
+	</div>
+
+	<div class="col-md-8" id="ajaxTotal">
+		#{total subTotal:0.00, total:0.00, igv:0.00 /}
+	</div>
+</div>
+
+<div >
+
+	<div  class="row bgCeleste" style="margin-top:10px">
+	<div  class="crudListTable"  >
+		<table >
+			<thead>
+				<tr>
+					<th>Peso</th>
+					<th>Precio</th>
+					<th>Especie</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody id="ajaxDetalleVenta">
+			</tbody>
+		</table>
+	</div>
+	</div>
+	<div style="margin-top:10px;" class="row bgCelesteHard">
+		<div class="col-md-4 ">
+			<div class="input-group">
+				<span class="input-group-addon">&{'tipoPago'}</span>
+				<select name="booking.beds" size="1" id="comboTipoPago" class="form-control" >
+				    <option value="1"selected="selected">Efectivo</option>
+				    <option value="3">Por Cobrar</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-4 ">
+		</div>
+
+		<div class="col-md-4 ">
+			<div class="input-group">
+				<span class="input-group-addon">&{'tipoDocumento'}</span>
+				<select name="booking.beds" size="1" id="comboTipoComprobante" onchange="cambiarTipoDocumento()" class="form-control" >
+				    <option value="1"selected="selected">Nota de venta</option>
+				    <option value="2" >Boleta</option>
+				    <option value="3">Factura</option>
+				</select>
+			</div>
+		</div>
+
+	</div>
+	
+	<div id="ajaxModoPago" style="margin:20px;" class="row">	
+		#{modoPago /}
+	</div>
+</div>
+
+</div>
+
+<div class="row text-right" >
+
+	<input type="hidden" id="isTodoOk" value=false>
+<input  id="vender"  onclick="confirmaVenta()"  id="confirmaVenta" type="button" value="REALIZAR LA VENTA" class="btn btn-primary btn-lg"  >
+<input  onclick="cancelarVenta()"  id="eliminaVenta" type="button" value="Cancelar" class="btn btn-warning btn-lg"  >
+
+</div>
+
+
+
+<script>
+$(function () {
+	$("#codigoBarra").focus()
+});
+</script>
+
+#{/if}
+#{else}
+<h2 class="text-center text-muted">No es posible efectuar ventas, es necesario aperturar caja</h2>
+
+#{/else}

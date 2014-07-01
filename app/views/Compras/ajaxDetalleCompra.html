@@ -1,0 +1,26 @@
+#{if chkAprobado}
+				<tr class="">
+					<th>${peso}</th>
+					<th>${precio}</th>
+					<th>${producto.toString()}</th>
+					<th>${total}</th>
+				</tr>
+				<script>
+				$("#montoTotalCompra").val('${montoTotal}');
+				var x = vectorDetalles.length; 
+				vectorDetalles[x]='${identificador}'
+				$("#precio").val("");
+				$("#isTodoOk").val(true);
+
+				$("#peso").val("");
+				$("#peso").focus();
+
+				$("#idProducto").val("");
+				$("#nombreEspecie").val("");
+				</script>
+#{/if}
+#{else}
+	<script>	
+		alert('${error}' )
+	</script>	
+#{/else}

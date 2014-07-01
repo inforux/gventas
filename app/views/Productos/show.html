@@ -1,0 +1,81 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+
+    <h2 id="crudShowTitle">&{'editProducto'}</h2>
+    <h5>&{'creado'}: ${object.fecha.format('dd MMMM yyyy hh:mm')}, &{'by'}: ${object.userCreo.getNCompleto()} </h5>
+    <h5>&{'stock'}: ${object.cantidad} ${object.categoria.getUnd()}</h5>
+    <h5>&{'sede'}: ${object.sede}</h5>
+
+    <div class="objectForm">
+	   #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+	  #{crud.form  }
+
+		  #{crud.custom '_id' }
+		   #{/crud.custom}
+		  #{crud.custom '_created' }
+		   #{/crud.custom}
+		  #{crud.custom '_modified' }
+		   #{/crud.custom}
+		  #{crud.custom 'fecha' }
+		   #{/crud.custom}
+		  #{crud.custom 'unidad' }
+		   #{/crud.custom}
+		  #{crud.custom 'cantidad' }
+		   #{/crud.custom}
+
+		  #{crud.custom 'userCreo' }
+		   #{/crud.custom}
+
+		  #{crud.custom 'categoria'}
+		 <label for="montoTotal">&{'categoria'}</label>
+		  <label for="montoTotal">${object.categoria}</label>
+		   #{/crud.custom}
+
+		  #{crud.custom 'precios' }
+
+		<div  class="crudListTable" >
+			<table >
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>P. Costo</th>
+						<th>P. Venta</th>
+						<th>Stock</th>
+					</tr>
+				</thead>
+				<tbody id="ajaxDetalleVenta">
+					#{list items:object.precios, as:'precio'}
+					<tr class="${classCss}">
+						<th>${precio.fecha.format('dd MMMM yyyy')}</th>
+						<th>${precio.precioCosto}</th>
+						<th>${precio.precioVenta}</th>
+						<th>${precio.cantidad}</th>
+					</tr>
+					#{/list}
+				</tbody>
+			</table>
+		</div>
+
+
+		   #{/crud.custom}
+
+
+		  #{crud.custom 'sede' }
+		   #{/crud.custom}
+
+	 #{/ crud.form }
+        <p class="crudButtons">
+
+	    <p id="crudListAdd">
+       		 <a href="@{Productos.list()}">&{'cancelar'}</a>
+	    </p>
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+        </p>
+    #{/form}
+
+    </div>
+
+</div>

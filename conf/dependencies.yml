@@ -1,0 +1,9 @@
+# Application dependencies
+
+require:
+    - play
+    - crud
+    - secure 
+    - play -> excel 1.2.3
+    - net.sf.flexjson -> flexjson 2.1
+    - play -> morphia 1.2.12

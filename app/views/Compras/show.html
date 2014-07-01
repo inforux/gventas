@@ -1,0 +1,100 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+	<h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+    	<h5>&{'creado'}: ${object.fecha.format('dd MMMM yyyy hh:mm')}, &{'by'}: ${object.userCreo.getNCompleto()} </h5>
+	<h5>&{'sede'}: ${object.sede}</h5>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+	  #{crud.form  }
+
+		  #{crud.custom 'modoPago'}
+		 <label for="modoPago">&{'modoPago'}</label>
+		 #{if object.modoPago== 0}
+		 <label for="modoPago">&{'efectivo'}</label>
+		 #{/if}
+		   #{/crud.custom}
+
+		  #{crud.custom 'montoTotal'}
+		 <label for="montoTotal">&{'montoTotal'}</label>
+		  <label for="montoTotal">${object.montoTotal}</label>
+		   #{/crud.custom}
+
+		   #{if object.saldo > 0}
+		  #{crud.custom 'saldo'}
+		 	<label for="montoTotal">&{'saldo'}</label>
+		  	<label for="montoTotal">${object.saldo} </label>
+		   #{/crud.custom}
+		  #{crud.custom 'aCta'}
+		 	<label for="aCta">&{'aCta'}</label>
+		  	<label for="aCta">${object.aCta} </label>
+		   #{/crud.custom}
+		   #{/if}
+		   #{else}
+
+		  	#{crud.custom 'aCta'}
+			  #{/crud.custom}
+			  #{crud.custom 'saldo'}
+			   #{/crud.custom}
+		   #{/else}
+
+		  #{crud.custom 'detallesProducto' }
+		<div  class="crudListTable" >
+			<table >
+				<thead>
+					<tr>
+						<th>Peso</th>
+						<th>Producto</th>
+						<th>Precio</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody id="ajaxDetalleVenta">
+					#{list items:object.detallesProducto, as:'detalle'}
+					<tr class="${classCss}">
+						<th>${detalle.peso}</th>
+						<th>${detalle.producto.toString()}</th>
+						<th>${detalle.precio}</th>
+						<th>${detalle.getTotal()}</th>
+					</tr>
+					#{/list}
+				</tbody>
+			</table>
+		</div>
+		   #{/crud.custom}
+
+
+		  #{crud.custom 'fecha' }
+		   #{/crud.custom}
+
+		  #{crud.custom 'userCreo' }
+		   #{/crud.custom}
+
+		  #{crud.custom 'cantidadProductos'}
+		 	<label for="montoTotal">&{'cantidadProductos'}</label>
+			<label for="montoTotal">${object.cantidadProductos} </label>
+		   #{/crud.custom}
+
+		  #{crud.custom 'sede'}
+		   #{/crud.custom}
+
+		  #{crud.custom 'proveedor'}
+		 	<label for="montoTotal">&{'proveedor'}</label>
+			<label for="montoTotal">${object.proveedor.toString()} </label>
+		   #{/crud.custom}
+
+	 #{/ crud.form }
+        <p class="crudButtons">
+
+	    <p id="crudListAdd">
+       		 <a href="@{Compras.list()}">&{'cancelar'}</a>
+	    </p>
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'Configuracion del Sistema' /}
+
+#{secure.check 'admin'}
+<h2 class="text-center">Configuracion del Sistema</h2>
+
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">
+      <h3 class="panel-title">Seguridad</h3>
+      </div>
+      <div class="panel-body row">
+	      <div class="col-md-6">
+
+	      </div>
+
+
+
+	      <div class="col-md-6">
+			<div class="panel panel-info">
+			      <div class="panel-heading">
+			      <h3 class="panel-title">Detalles del host cliente</h3>
+			      </div>
+			      <div class="panel-body row">
+
+			<div class="input-group input-group-md" >
+				<h4 >Direccion IP: <span class="label label-default">${cIp}</span></h4>
+				<h4 >Direccion MAC: <span class="label label-default">${cMac}</span></h4>
+			</div>
+			      </div>
+		       </div>
+
+	      </div>
+
+     </div>
+</div>
+#{/secure.check}

@@ -1,0 +1,28 @@
+%{
+	subTotal=_subTotal;
+	total=_total;
+	igv=_igv;
+}%
+	<div class="row">
+
+
+		<div class="col-md-4">
+
+			<div class="input-group input-group-md" >
+				<h4 >&{'subTotal'}: <span class="label label-default">${subTotal}</span></h4>
+				<input type="hidden" id="subTotal" value='${subTotal}' >
+			</div>
+		</div>
+
+		<div class="col-md-3">
+				<h4 >&{'igv'}: <span class="label label-default">${igv}</span></h4>
+				<input id="igv" type="hidden" value='${igv}' >
+		</div>
+
+		<div class="col-md-5" >
+			<div class="input-group input-group-md " >
+				<h2  >&{'totalPagar'}: <span class="  label label-warning">${total}</span></h2>
+				<input id="montoTotal" type="hidden" value='${total}' >
+			</div>
+		</div>
+	</div>

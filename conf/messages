@@ -1,0 +1,190 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+#
+
+# play/modules/crud (administration) 
+ crud.title = Administración 
+ crud.home = Página principal
+ crud.blank = Nuevo
+ crud.index.title = 
+#Seleccione el objeto a modificar 
+ crud.index.objectType =  Tabla
+ crud.index.action = 
+#XXX 
+ crud.index.add = Agregar
+ crud.add = Agregar &{%s} 
+ crud.list.title = &{%s} 
+ crud.list.size = %d &{%s} 
+ crud.list.totalSize = %d en total 
+ crud.pagination.previous = « Anterior 
+ crud.pagination.next = Siguiente » 
+ crud.pagination.last = Último »» 
+ crud.pagination.first = «« Primero 
+ crud.show.title = Editar &{%s} 
+ crud.save = Guardar
+ crud.saveAndContinue = Guardar y seguir editando 
+ crud.cancel = Cancelar
+ crud.hasErrors = Por favor, corrija los errores. 
+ crud.blank.title = Agregar &{%s} 
+ crud.saveAndAddAnother = Guardar y agregar uno nuevo 
+ crud.delete = Eliminar &{%s} 
+ crud.created = &{%s} ha sido creado 
+ crud.saved = &{%s} ha sido guardado
+ crud.deleted = &{%s} ha sido eliminado
+ crud.delete.error = No puede eliminar el objeto 
+ crud.search = Buscar
+ crud.select=Selecionada
+ crud.none = (algún) 
+ crud.help.required = Requerido. 
+ crud.help.minlength = La longitud mínima es %d. 
+ crud.help.maxlength = La longitud máxima es %d. 
+ crud.help.email = Una dirección de correo válida 
+ crud.help.dateformat = En formado YYYY-MM-DD. 
+ crud.help.numeric = Numérico. 
+ crud.help.min = Debe ser mayor a %d. 
+ crud.help.future = En el futuro. 
+ crud.help.past = En el pasado. 
+ crud.help.after = Después de %s. 
+ crud.help.before = Antes de %s. 
+ crud.help.range = Entre %d y %d 
+ crud.help.equals=
+#validaciones
+#
+#
+#
+validation.required=Requerido
+validation.minSize=Minimum size is %2$d
+validation.maxSize=Maximum size is %2$d
+validation.email=Correo electronico invalido
+validation.range=No pertenece al rango %2$d y %3$d
+validation.min=No deberia ser menor que %2$d
+validation.max=No deberia ser mayor que %2$d
+validation.match=Deberia coincidir a %2$s
+validation.isTrue=Deberia estar seleccionado
+validation.equals=Deberia ser igual a &{%2$s}
+validation.invalid=Valor incorrecto
+validation.future=Must be in the future
+validation.after=Must be after %2$s
+validation.past=Must be in the past
+validation.before=Must be before %2$s
+validation.object=Fallo la validacion
+validation.notFound=Objecto no encontrado para id %2$s
+validation.url=No es  un enlace web valido
+validation.phone=No es una numero telefonico valido
+validation.ipv4=Not a valid IP address
+validation.ipv6=Not a valid IP v6 address
+validation.unique=Deberia ser unico
+validation.used = &{%1$s} already used on date %2$s
+user.password = Password
+#  
+#  # play/modules/secure 
+ secure.username = Su dirección de correo: 
+ secure.password = Su clave: 
+ secure.signin = Entrar 
+
+#generales
+generarReporteClientes=Generar Reporte de clientes 
+generarReporteProveedores=Generar Reporte de proveedores 
+generarReporteVentas=Generar Reporte de ventas 
+generarReporteCompras=Generar Reporte de compras 
+generarReporteUsuarios=Generar Reporte de usuarios 
+generarReporteProductos=Generar Reporte de productos
+productos=Productos
+precioVenta=Precio de Venta(hoy)
+montoACuenta=A cuenta
+importe=Importe
+vuelto=Vuelto
+mAbonado=Abonado
+mContabilizado=Contabilizado
+operacion=Operacion
+tarjeta=Tarjeta
+tipoDocumento=Comprobante
+aTarjeta=Tarjeta
+efectivo=Efectivo
+subTotal=Subtotal
+totalPagar=TOTAL
+aCuenta=A cuenta
+tipoPago=Tipo de pago
+codigoDeBarras=Codigo de barras
+nuevaVenta=Nueva venta
+vendedor=Vendedor
+categoria=Categoria
+abreviado=Abreviado
+unidad=Unidad de medida
+pescados=Pescados
+pagoCon=Pago con
+montoACobrar=Monto a cobrar
+codeOperacion=Codigo operacion (Tarjeta)
+montoAbonado=Monto abonado
+montoContabilizado=Monto contabilizado
+saldoTemporal=Saldo temporal
+cambio=Devolucion(Cambio)
+comprobante=Comprobante
+cliente=Cliente
+by=por
+efectivo=Efectivo
+compra=Compra
+venta=Venta
+correlativo=Correlativo
+subTotal=Sub-total
+total=Total
+modoPago=Modo de pago
+serie=Serie
+montoTotal=Monto total
+saldo=Saldo
+aCta=A Cuenta
+cantidadProductos=Cantidad de productos
+proveedor=Proveedor
+ruc=Ruc
+razonSocial=Razon Social
+dni=DNI
+fono=Telefono
+creado=Creado
+sede=Sede
+requerido=Requerido
+mant=Mantenimiento
+isEliminado=Desabilitado
+confirmPassword=Confirmar clave
+stock=Stock
+nombre=Nombre
+nombres=Nombres
+fecha=Fecha
+password=Clave
+editProducto=Editar Producto
+guardar=Guardar
+noEditable=No editable
+nombreSede=Nombre de la sede
+direccionNegocio=Direccion del negocio
+igv=Igv
+comisionTarjeta=Comision (Tarjeta)
+correlativoBoleta=Correlativo (Boleta)
+serieBoleta= Serie (Boleta)
+correlativoFactura=Correlativo (Factura)
+serieFactura=Serie (Factura)
+telefono=Telefono
+slogan=Pie (Comprobantes)
+
+#since en las fechas
+since.seconds = %s segundo%s atras
+since.minutes = %s minuto%s atras 
+since.hours   = %s hora%s atras 
+since.days    = %s dia%s atras 
+since.months  = %s mes%es atras 
+since.years   = %s año%s atras 
+since.format  = MMM d, yyyy
+
+#tabla productos
+idVenta=Codigo de balanza
+precio=Precio
+cantidad=Stock
+webNegocio=URL
+slogman=Pie pagina (Comprobantes)
+November=Noviembre
+
+#Usuarios
+email=Correo electronico
+apellidos1=Primer apellido
+apellidos2=Segundo apellido
+sexo=Sexo
+isAdmin=Administrador

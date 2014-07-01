@@ -1,0 +1,42 @@
+#{extends 'main.html' /}
+#{set title:'Inventario' /}
+
+<br>
+	    <button style="float:right;margin-left:10px;" class="btn btn-success btn-md" onclick="saveInventario()">
+            Guardar Inventario 
+        </button>
+
+			<a style="float:right" href="@{Reportes.generateIProductos()}" >Generar hoja</a>
+
+        <h1 class="info"> Nuevo Inventario</h1>
+
+                            <label for="contenido">Descripción ( Comentario )</label>
+                            <textarea class="form-control" id="comentario" rows="2"></textarea>
+<br>
+
+<table class="table table-bordered">
+    <tbody>
+      <!-- Aplicadas en las filas -->
+   </tr>
+    <td class="default">#</td>
+    <td class="default">Cod. Balanza</td>
+    <td class="default">Producto</td>
+    <td class="default">Stock</td>
+    <td class="default">P. Costo</td>
+    </tr>
+               
+            #{list items:productos, as:'producto'}
+            <!-- Aplicadas en las celdas (<td> o <th>) -->
+            <tr>
+                <td class="default">${producto_index}</td>
+                <td class="active">${producto.idVenta}</td>
+                <td class="success">${producto.toString()}</td>
+                <td class="danger">${producto.cantidad}</td>
+                <td class="warning">${producto.getPrecioVenta()}</td>
+            </tr>
+            #{/list}
+    </tbody>
+</table>
+    <p>Total de filas :   ${productos.size()}   |    Fecha:   ${new Date().format('dd MM yyyy hh:mm:ss')}</p> 
+
+

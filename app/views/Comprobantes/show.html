@@ -1,0 +1,69 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+	<h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+    	<h5>&{'creado'}: ${object.fecha.format('dd MMMM yyyy hh:mm')}, &{'by'}: ${object.userCreo.getNCompleto()} </h5>
+        <h5>&{'sede'}: ${object.sede}</h5>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+	  #{crud.form  }
+
+		  #{crud.custom 'fecha'}
+		  #{/crud.custom}
+
+		  #{crud.custom 'sede'}
+		  #{/crud.custom}
+
+		  #{crud.custom 'subTotal'}
+			 <label for="montoTotal">&{'subTotal'}</label>
+			 <label for="montoTotal">${object.subTotal}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'serie'}
+			 <label for="montoTotal">&{'serie'}</label>
+			 <label for="montoTotal">${object.serie}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'correlativo'}
+			 <label for="montoTotal">&{'correlativo'}</label>
+			 <label for="montoTotal">${object.correlativo}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'igv'}
+			 <label for="montoTotal">&{'igv'}</label>
+			 <label for="montoTotal">${object.igv}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'total'}
+			 <label for="montoTotal">&{'total'}</label>
+			 <label for="montoTotal">${object.total}</label>
+		  #{/crud.custom}
+		  #{crud.custom 'compra'}
+			 <label for="montoTotal">&{'compra'}</label>
+			 <label for="montoTotal">${object.compra.getMontoTotal()}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'venta'}
+			 <label for="montoTotal">&{'venta'}</label>
+			 <label for="montoTotal">${object.venta?.getMontoTotal()}</label>
+		  #{/crud.custom}
+
+		  #{crud.custom 'userCreo' }
+		   #{/crud.custom}
+
+	 #{/ crud.form }
+        <p class="crudButtons">
+
+	    <p id="crudListAdd">
+       		 <a href="@{Comprobantes.list()}">&{'cancelar'}</a>
+	    </p>
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Copia de Seguridad' /}
+<h3>Copia de seguridad</h3>
+<label>Fecha</label>
+<p>${new Date().format('dd MMMM yyyy hh:mm')}</p>
+<label>Base de datos</label>
+<p>PuntoVenta</p>
+<label>Tamaño de la Base de datos</label>
+<p>167 kb</p>
+<br>
+<input type="button" value="Generar copia" onclick="generarCopiaSeguridad()">

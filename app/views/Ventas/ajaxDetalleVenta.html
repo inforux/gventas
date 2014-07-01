@@ -1,0 +1,21 @@
+#{if chkAprobado}
+				<tr class="${classCss}">
+					<th>${peso}</th>
+					<th>${producto.getPrecioVenta()}</th>
+					<th>${producto.toString()}</th>
+					<th>${precio}</th>
+				</tr>
+				<script>
+				
+				$("#subTotal").val('${subTotal}');
+				$("#montoTotal").val('${precioTotal}');
+				var x = vectorDetalles.length; 
+				vectorDetalles[x]='${identificador}'
+
+				</script>
+#{/if}
+#{else}
+	<script>	
+		alert('${error}' )
+	</script>	
+#{/else}

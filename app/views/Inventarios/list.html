@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'Inventario' /}
+
+<br>
+        <h1 class="info"> Inventarios</h1>
+
+<table class="table table-hover">
+    <tbody>
+      <!-- Aplicadas en las filas -->
+   </tr>
+    <td class="default">#</td>
+    <td class="default">Descripción</td>
+    <td class="default">Fecha</td>
+    <td class="default">Realizado</td>
+    </tr>
+               
+            #{list items:inventarios, as:'inventario'}
+            <!-- Aplicadas en las celdas (<td> o <th>) -->
+            <tr style="cursor:pointer;" onclick="modalInventario('${inventario.id}')"  data-toggle="modal" data-target="#myModal">
+                <td class="">${inventario_index}</td>
+                <td class="">${inventario.descripcion}</td>
+                <td class="">${inventario.fecha.format('dd MM yyyy hh:mm:ss')}</td>
+                <td class="">${inventario.userCreo.getNCompleto()}</td>
+            </tr>
+            #{/list}
+    </tbody>
+</table>

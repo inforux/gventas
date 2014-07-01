@@ -1,0 +1,17 @@
+			    #{if usrLogueado.getIsAbrirCaja()}
+				    	<script>
+					$("#nventa").removeClass("disabled");
+					$("#npago").removeClass("disabled");
+					$("#rdinero").removeClass("disabled");
+					</script>
+				<a class="cursor" onclick="isAbrirCaja(false)">Cerrar Caja</a>
+			    #{/if}
+			    #{else}
+				    	<script>
+					$("#nventa").addClass("disabled");
+					$("#npago").addClass("disabled");
+					$("#rdinero").addClass("disabled");
+					</script>
+				<a class="cursor" onclick="isAbrirCaja(true)">Abrir Caja</a>
+			    #{/else}
+

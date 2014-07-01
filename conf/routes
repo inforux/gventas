@@ -1,0 +1,106 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Public.index
+GET     /nosotros?                              Public.nosotros
+GET     /ofertas?				Public.ofertas
+GET     /cachemas?				Public.cachemas
+GET     /cabrillas?				Public.cabrillas
+GET     /contacto?				Public.contacto
+
+GET	/npago?					Application.npago
+GET	/rdinero?				Application.rdinero
+GET	/epaginas?				Application.epaginas
+GET	/config?				Application.config
+
+GET	/productos/new/?			Productos.blank
+GET	/productos/list/?			Productos.list
+GET	/productos/{id}/?			Productos.show
+
+GET	/usuarios/new/?				Usuarios.blank
+GET	/usuarios/list/?			Usuarios.list
+GET	/usuarios/{id}/?			Usuarios.show
+
+GET	/proveedores/new/?			Proveedores.blank
+GET	/proveedores/list/?			Proveedores.list
+GET	/proveedores/{id}/?			Proveedores.show
+
+GET	/clientes/new/?				Clientes.blank
+GET	/clientes/list/?			Clientes.list
+GET	/clientes/{id}/?			Clientes.show
+
+GET	/sedes/new/?				Sedes.blank
+GET	/sedes/list/?				Sedes.list
+GET	/sedes/{id}/?				Sedes.show
+
+GET	/compras/new/?				Compras.blank
+GET	/compras/list/?				Compras.list
+GET	/compras/{id}/?				Compras.show
+
+GET	/unidades/new/?				Unidades.blank
+GET	/unidades/list/?			Unidades.list
+GET	/unidades/{id}/?			Unidades.show
+
+GET	/categorias/new/?			Categorias.blank
+GET	/categorias/list/?			Categorias.list
+GET	/categorias/{id}/?			Categorias.show
+
+GET	/ventas/new/?				Ventas.blank
+GET	/ventas/list/?				Ventas.list
+GET	/ventas/{id}/?				Ventas.show
+
+GET	/comprobantes/list/?			Comprobantes.list
+GET	/comprobantes/{id}/?			Comprobantes.show
+
+GET 	/reportes/productos/list?		Productos.list
+GET     /reportes/{<[0-9]+>id}/producto		Reportes.generateProducto
+GET 	/reportes/productos/productos		Reportes.generateProductos(format:'xlsx')
+
+GET 	/reportes/productos/iproductos		Reportes.generateIProductos(format:'xlsx')
+GET 	/reportes/productos/iproductos2		Reportes.generateIProductos2(format:'xlsx')
+
+GET 	/reportes/ventas/list?			Ventas.list
+GET     /reportes/{<[0-9]+>id}/venta		Reportes.generateVenta
+GET 	/reportes/ventas/ventas		Reportes.generateVentas(format:'xlsx')
+
+GET 	/reportes/compras/list?			Compras.list
+GET     /reportes/{<[0-9]+>id}/compra		Reportes.generateCompra
+GET 	/reportes/compras/compras		Reportes.generateCompras(format:'xlsx')
+
+GET 	/reportes/clientes/list?		Clientes.list
+GET     /reportes/{<[0-9]+>id}/cliente		Reportes.generateCliente
+GET 	/reportes/clientes/clientes 		Reportes.generateClientes(format:'xlsx')
+
+GET 	/reportes/proveedores/list?		Proveedores.list
+GET     /reportes/{<[0-9]+>id}/proveedor	Reportes.generateProveedor
+GET 	/reportes/proveedores/proveedores		Reportes.generateProveedores(format:'xlsx')
+
+GET 	/reportes/usuarios/list?		Usuarios.list
+GET     /reportes/{<[0-9]+>id}/usuario		Reportes.generateUsuario
+GET 	/reportes/usuarios/usuarios		Reportes.generateUsuarios(format:'xlsx')
+
+GET 	/reportes/ventas/?			Reportes.ventas
+GET 	/reportes/compras/?			Reportes.compras
+GET 	/reportes/clientes/?			Reportes.clientes
+GET 	/reportes/proveedores/?			Reportes.proveedores
+GET 	/reportes/usuarios/?			Reportes.usuarios
+
+GET 	/copiaseguridad/?   			Application.copiaSeguridad
+
+POST    /saveAddUser/       			Usuarios.saveAddUser
+POST    /saveInventario/    			Inventarios.saveInventario
+POST    /modalInventario/    			Inventarios.modalInventario
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
+
+# Importar routes del módulo CRUD
+*      /mantenimiento/?				module:crud

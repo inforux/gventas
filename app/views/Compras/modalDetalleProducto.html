@@ -1,0 +1,34 @@
+	        <div class="modal-header" >
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h2 class="text-center modal-title" id="myModalLabel">Seleccionar Producto</h2>
+	       </div>
+               <div class="modal-body" >
+			<!-- /.contenido del modal, se cargara con ajax-->
+
+	        <table class="table table-hover">
+
+			<thead>
+		             <tr>
+					<th>#</th>
+					<th>Nombre</th>
+			                <th>Stock</th>
+		                  	<th>Cod. Balanza</th>
+		            </tr>
+		       </thead>
+
+		       <tbody>
+				#{list items:productos, as:'producto'}
+				<tr class="cursor" onclick="setProductoCompra('${producto.id}', '${producto.toString()}')" >
+				<td>${producto_index}</td>
+				<td>${producto.toString()}</td>
+				<td>${producto.cantidad}</td>
+				<td>${producto.idVenta}</td>
+			        </tr>
+				#{/list}
+		       <tbody>
+		</table>
+
+	       </div>
+	       <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="setProductoCompra(0,0)">Close</button>
+	      </div>

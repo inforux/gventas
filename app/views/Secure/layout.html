@@ -1,0 +1,42 @@
+<html>
+    <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/justified-nav.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap-theme.min.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+
+        #{script src:"jquery-1.9.1.js" /}
+	#{script src:"bootstrap.min.js" /}
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+
+
+<div class="container">
+
+       <div class="masthead">
+
+		       <h3 class="text-muted ">Pescados y Mariscos "San Jose"  </h3>
+
+	#{menu usrLogueado:usrLogueado /}
+      </div>
+      <div>
+		#{doLayout /}
+      </div>
+
+
+         <!-- Site footer -->
+  <div class="footer">
+          <p>&copy; Inforux 2013</p>
+  </div>
+
+</div> <!-- /container -->
+
+    </body>
+</html>
+

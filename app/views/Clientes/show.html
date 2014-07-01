@@ -1,0 +1,28 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+	<h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+	<h5>Creado: ${object.fecha.format('dd MMMM yyyy hh:mm')}</h5>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+	  #{crud.form  }
+
+		  #{crud.custom 'userCreo' }
+		   #{/crud.custom}
+
+	 #{/ crud.form }
+        <p class="crudButtons">
+
+	    <p id="crudListAdd">
+       		 <a href="@{Clientes.list()}">&{'cancelar'}</a>
+	    </p>
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+        </p>
+    #{/form}
+    </div>
+
+</div>

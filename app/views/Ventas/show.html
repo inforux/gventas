@@ -1,0 +1,168 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div id="crudShow" class="${type.name}">
+	<h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+    	<h5>&{'creado'}: ${object.fecha.format('dd MMMM yyyy hh:mm')}, &{'by'}: ${object.userCreo.getNCompleto()} </h5>
+        <h5>&{'sede'}: ${object.sede}</h5>
+
+    <div class="objectForm">
+    #{form action:@save(object._key()), enctype:'multipart/form-data'}
+
+	  #{crud.form  }
+
+		  #{crud.custom '_id' }
+		   #{/crud.custom}
+		  #{crud.custom '_created' }
+		   #{/crud.custom}
+		  #{crud.custom '_modified' }
+		   #{/crud.custom}
+	  #{crud.custom 'modoPago'}
+
+			<div class="input-group input-group-lg " >
+				<h4 >&{'modoPago'}: 
+		 #{if object.modoPago== 0}
+					<span class="label label-default">&{'efectivo'}</span></h4>
+		 #{/if}
+		 #{if object.modoPago== 1}
+					<span class="label label-default">&{'tarjeta'}</span></h4>
+		 #{/if}
+		 #{if object.modoPago== 2}
+					<span class="label label-default">&{'ctaCobrar'}</span></h4>
+		 #{/if}
+			</div>
+
+	   #{/crud.custom}
+
+		  #{crud.custom 'montoTotal'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'montoTotal'}: <span class="label label-default">${object.montoTotal}</span></h4>
+			</div>
+		   #{/crud.custom}
+
+		  #{crud.custom 'pagoCon'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'pagoCon'}: <span class="label label-default">${object.pagoCon}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'saldo'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'saldo'}: <span class="label label-default">${object.saldo}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'aCta'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'aCta'}: <span class="label label-default">${object.aCta}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'montoACobrar'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'montoACobrar'}: <span class="label label-default">${object.montoACobrar}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'codeOperacion'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'codeOperacion'}: <span class="label label-default">${object.codeOperacion}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'montoAbonado'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'montoAbonado'}: <span class="label label-default">${object.montoAbonado}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'montoContabilizado'}
+			<div class="input-group input-group-lg" >
+			<h4 >&{'montoContabilizado'}: <span class="label label-default">${object.montoContabilizado}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'saldoTemporal'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'saldoTemporal'}: <span class="label label-default">${object.saldoTemporal}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'cambio'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'cambio'}: <span class="label label-default">${object.cambio}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'cantidadProductos'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'cantidadProductos'}: <span class="label label-default">${object.cantidadProductos}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'comprobante'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'comprobante'}: <span class="label label-default">${object.comprobante.toString()}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'cliente'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'cliente'}: <span class="label label-default">${object.cliente.toString()}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+		  #{crud.custom 'igv'}
+			<div class="input-group input-group-lg" >
+				<h4 >&{'igv'}: <span class="label label-default">${object.igv}</span></h4>
+			</div>
+		  #{/crud.custom}
+
+
+		  #{crud.custom 'detallesProducto' }
+		<div  class="crudListTable" >
+			<table >
+				<thead>
+					<tr>
+						<th>Peso</th>
+						<th>Producto</th>
+						<th>Precio</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody id="ajaxDetalleVenta">
+					#{list items:detallesProducto, as:'detalle'}
+					<tr class="${classCss}">
+						<th>${detalle.peso}</th>
+						<th>${detalle.producto.toString()}</th>
+						<th>${detalle.precio}</th>
+						<th>${detalle.getTotal()}</th>
+					</tr>
+					#{/list}
+				</tbody>
+			</table>
+		</div>
+		   #{/crud.custom}
+
+
+		  #{crud.custom 'sede'}
+		  #{/crud.custom}
+
+		  #{crud.custom 'fecha' }
+		   #{/crud.custom}
+		  #{crud.custom 'userCreo' }
+		   #{/crud.custom}
+
+	 #{/ crud.form }
+        <p class="crudButtons">
+
+	    <p id="crudListAdd">
+       		 <a href="@{Ventas.list()}">&{'cancelar'}</a>
+	    </p>
+            <input type="submit" class="btn btn-primary btn-md" name="_save" value="&{'crud.save', type.modelName}" />
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" class="btn btn-warning btn-md"   />
+        </p>
+    #{/form}
+    </div>
+
+</div>

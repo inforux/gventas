@@ -1,0 +1,11 @@
+# O usar comodines
+*~
+*.swp
+bin/
+data/
+db/
+dist/
+logs/
+test-result/
+lib/
+tmp/

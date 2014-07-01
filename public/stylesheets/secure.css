@@ -1,0 +1,191 @@
+html, body {
+    margin:0;
+    padding:0;
+    font-family: 'Lucida grande', verdana, sans-serif;
+}
+
+@font-face {
+	    font-family: "oracle";
+	        src: url("/public/fonts/oracle.ttf") format("truetype");
+}
+
+@font-face {
+        font-family: "android";
+        src: url("/public/fonts/android.ttf") format("truetype");
+}
+
+@font-face {
+        font-family: "roboto";
+        src: url("/public/fonts/roboto.ttf") format("truetype");
+}
+
+.tituloE{ 
+    margin-left:100px;
+    font-family: "oracle", Verdana, Tahoma;
+    font-size:50px; 		    
+    color:white;
+}
+
+#login {
+	display: block;
+   margin-left:90px; 
+text-align:center;	
+	width: 500px;
+	margin-left:780px;
+	margin-top:-450px;
+}
+
+#login h1 {
+    font-weight: bold;
+    color: #111;
+}
+
+#login form {
+    background: #fff;
+    padding: 10px;
+    text-align:left;
+}
+
+#login form p {
+    margin: 3px;
+}
+
+#username-field {
+    margin-top: 10px !important;
+}
+
+#username-field label, #password-field label {
+    font-family: "android", Verdana, Tahoma;
+    display: block;
+    width: 150px;
+    float: left;
+    text-align: right;
+    margin-right: 5px;
+    color: #333;
+    font-size: 15px;
+}
+
+.bonitoField{
+padding: 5px;  
+    font-size: 15px;  
+        text-shadow: 0px 1px 0px #fff;  
+	    outline: none;  
+	        background: -webkit-gradient(linear, left top, left bottombottom, from(#bcbcbe), to(#ffffff));  
+		    background: -moz-linear-gradient(top,  #bcbcbe,  #ffffff);  
+		        -webkit-border-radius: 3px;  
+			    -moz-border-radius: 3px;  
+			        border-radius: 3px;  
+				    border: 1px solid #717171; 
+}
+
+.btn{
+	line-height: 29px;
+	vertical-align: bottom;
+	border: 1px solid #3079ed;
+	color: #fff;
+	text-shadow: 0 1px rgba(0,0,0,0.1);
+	background-color:#d14836 ;
+}
+
+#username-field input {
+    width: 200px;
+    font-size: 13px;
+}
+
+#password-field input {
+    width: 150px;
+    font-size: 13px;
+}
+
+#remember-field input {
+    margin-left: 155px;
+}
+
+#remember-field {
+    font-family: "android", Verdana, Tahoma;
+    font-size: 12px;
+    color: #666;
+}
+
+#signin-field input {
+    font-family: "android", Verdana, Tahoma;
+    font-size:15px;
+    margin-left: 155px;
+    margin-top: 10px;
+}
+
+#login .error, #login .success  {
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#login .error {
+    background: #c00 !important;
+}
+
+#login .success {
+    background: #008800 !important;
+}
+
+.container {
+
+margin-top:-50px;
+}
+
+.dNavegacion{
+
+    height:70px; 
+    background-image: url("/public/images/barraNav.jpg"); 
+width:100%;
+}
+
+.dContenido{
+	padding:10px;
+	padding-bottom:60px;   /* Height of the footer */
+	clear: both;
+	display: block;
+height:505px;
+}
+
+.dFooter{
+    height:50px; 
+    background-image: url("/public/images/barraNav.jpg"); 
+        width:100%;
+}
+
+.cRojo{
+	height:100%;
+	background-image: url("/public/images/wall.jpg"); 
+	background-repeat:no-repeat;
+	margin-top:60px;
+	margin-left:40px;
+}
+
+.cCloudt{
+	padding-top:80px;
+	margin-left:60px;
+	font-family: "oracle", Verdana, Tahoma;
+	color:#ffffff
+}
+
+.cloudT{
+	font-size:40px;
+}
+
+.cloudT2{
+	font-size:28px;
+}
+.cloudT3{
+	font-size:20px;
+}
+.cloudT4{
+	font-size:12px;
+}
+
+.text{width:100%;
+font-weight:bold;	
+	border-bottom:1px solid black;
+padding-bottom:2px;}

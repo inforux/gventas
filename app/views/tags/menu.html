@@ -1,0 +1,127 @@
+%{
+	usrLogueado=_usrLogueado;
+}%
+          <ul class="nav nav-justified">
+              <li class="active"><a href="/">Inicio</a></li>
+              <li><a href="/nosotros">Nosotros</a></li>
+
+	#{if usrLogueado != null}
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Facturación<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			<li role="presentation" class="dropdown-header">Ventas</li>
+			<li class="disabled" id="nventa"><a href="@{Ventas.blank}">Nueva Venta</a></li>
+	                <li><a href="#">Anular Venta</a></li>
+			<li role="presentation" class="dropdown-header">Compras</li>
+			<li><a href="@{Compras.blank}">Nueva Compra</a></li>
+                   	<li><a href="#">Anular Compra</a></li>
+                 </ul>
+              </li>
+
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mantenimiento<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			<li class="" id="mnuProductos" class="disabled"><a href="@{Productos.list}">Productos</a></li>
+	                <li class="disabled"><a href="@{Ventas.list}">Ventas</a></li>
+			<li class="disabled"><a href="@{Compras.list}">Compras</a></li>
+			<li class="disabled"><a href="@{Comprobantes.list}">Comprobantes</a></li>
+			<li class="disabled"><a href="@{Proveedores.list}">Proveedores</a></li>
+			<li class="disabled"><a href="@{Clientes.list}">Clientes</a></li>
+			<li class="disabled"><a href="@{Usuarios.list}">Usuarios</a></li>
+			<li class="disabled"><a href="@{Sedes.list}">Sedes</a></li>
+			<li class="disabled"><a href="@{Categorias.list}">Categorias</a></li>
+			<li class="disabled"><a href="@{Unidades.list}">Unidad de Medidas</a></li>
+                 </ul>
+              </li>
+
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movimientos<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			<li role="presentation" class="dropdown-header">Inventario</li>
+			<li class="disabled"><a href="@{Inventarios.nuevo}">Nuevo Inventario</a></li>
+			<li class="disabled"><a href="@{Inventarios.list}">Inventarios</a></li>
+			<li  role="presentation" class="dropdown-header">Sincronizar</li>
+                   	<li class="disabled"><a href="#">Nueva Sincronizacion</a></li>
+			<li role="presentation" class="dropdown-header">Caja</li>
+                   	<li class="disabled"><a href="#">Cerrar Cajas</a></li>
+                 </ul>
+              </li>
+
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			  <li class="disabled"><a href="/reportes/productos/list">Productos</a></li>
+			  <li class="disabled"><a href="/reportes/ventas/list">Ventas</a></li>
+			  <li class="disabled"><a href="/reportes/compras/list">Compras</a></li>
+			  <li class="disabled"><a href="/reportes/proveedores/list">Proveedores</a></li>
+		  	  <li class="disabled"><a href="/reportes/clientes/list">Clientes</a></li>
+			  <li class="disabled"><a href="/reportes/usuarios/list">Usuarios</a></li>
+			  <li class="disabled"><a href="/reportes/caja">Caja</a></li>
+                 </ul>
+              </li>
+
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sistema<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			  <li role="presentation" class="dropdown-header">Sistema</li>
+			  <li class="disabled"><a href="@{Application.config()}">Configuracion </a></li>
+		          <li class="disabled"><a href="@{Application.ePaginas()}">Edicion de Paginas</a></li>
+			  <li role="presentation" class="dropdown-header">Seguridad</li>
+			  <li class="disabled"><a href="/reportes/ventas/list">Seguridad</a></li>
+			  <li role="presentation" class="dropdown-header">Backup</li>
+			  <li class="disabled"><a href="/reportes/compras/list">Nuevo backup</a></li>
+			  <li class="disabled"><a href="/reportes/proveedores/list">Mantenimiento backup</a></li>
+                 </ul>
+              </li>
+
+
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                   	<li class="" id="ajaxAbrirCaja">
+			    #{if usrLogueado.getIsAbrirCaja()}
+				<a class="cursor" onclick="isAbrirCaja(false)">Cerrar Caja</a>
+			    #{/if}
+			    #{else}
+				<a class="cursor" onclick="isAbrirCaja(true)">Abrir Caja</a>
+			    #{/else}
+
+
+			</li>
+			<li class="disabled" id="npago"><a href="@{Application.nPago()}">Nuevo Pago</a></li>
+			<li class="disabled" id="rdinero"><a href="@{Application.rDinero()}">Retiro de Dinero</a></li>
+                 </ul>
+              </li>
+
+	#{/if}
+	#{else}
+	      <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pescados y Mariscos<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+			<li ><a href="/cachemas">Cachema</a></li>
+			<li ><a href="/cabrillas">Cabrilla</a></li>
+                 </ul>
+              </li>
+
+	      <li><a href="/ofertas">Ofertas</a></li>
+	      <li><a href="/contacto">Contacto</a></li>
+	#{/else}
+
+
+
+	</ul>
+			    #{if usrLogueado?.getIsAbrirCaja()}
+				    	<script>
+					$("#nventa").removeClass("disabled");
+					$("#rdinero").removeClass("disabled");
+					$("#npago").removeClass("disabled");
+					</script>
+			    #{/if}
+			    #{else}
+			    	<script>
+					$("#nventa").addClass("disabled");
+					$("#npago").addClass("disabled");
+					$("#rdinero").addClass("disabled");
+				</script>
+			    #{/else}
+

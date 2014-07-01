@@ -1,0 +1,18 @@
+.cursor{
+	cursor: pointer;
+}
+
+.bgCeleste{
+	background:#f4f8fa;
+}
+.bgCelesteHard{
+	background:#edeff4;
+}
+
+.bgGriss{
+	background:#f4f4f4
+}
+[disabled] {
+	color:black;
+	font-weight:bold;
+}

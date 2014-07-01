@@ -1,0 +1,57 @@
+#{extends 'CRUD/layout.html' /}
+
+    #{if isReporte}
+	#{set title:messages.get('Reporte de Clientes') /}
+    #{/if}
+    #{else}
+	#{set title:messages.get('crud.list.title', type.name) /}
+    #{/else}
+
+	    <button style="float:right" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal" onclick="openModalAddUser()">
+            Nuevo Usuario
+        </button>
+<div id="crudList" class="${type.name}">
+
+    <h2 id="crudListTitle">&{'crud.list.title', type.name}</h2>
+
+
+    #{if !isReporte}
+    <div id="crudListSearch">
+        #{crud.search /}
+    </div>
+    #{/if}
+
+    #{if isReporte}
+    <div id="crudListTable">
+		 #{crud.table fields:['nombres', 'email', 'sede','Accion',] }
+		       #{crud.custom 'nombres'}
+		       		${object.nombres}
+		       #{/crud.custom}
+
+		       #{crud.custom 'Accion'}
+				<a href="@{Reportes.generateUsuario(object.id)}" >Generar hoja</a>
+		       #{/crud.custom}
+
+		 #{/crud.table}
+	    </div>
+	    <p id="crudListAdd">
+		    <a href="/reportes/usuarios/usuarios" >&{'generarReporteUsuarios'}</a>
+	    </p>
+    #{/if}
+    #{else}
+
+	    <div id="crudListTable">
+		#{crud.table fields:['nombres', 'email','sede'] /}
+	    </div>
+
+
+
+    #{/else}
+
+
+    <div id="crudListPagination">
+        #{crud.pagination /}
+    </div>
+
+
+</div>
